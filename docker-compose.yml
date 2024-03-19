@@ -1,0 +1,20 @@
+version: "3"
+services:
+  postgres:
+    image: eliormigdal/kaplat-postgres:latest
+#to expose postgres container externally
+    ports:
+      - "5432:5432"
+  mongo:
+    image: eliormigdal/kaplat-mongodb:latest
+#to expose mongo container externally
+    ports:
+      - "27017:27017"
+  app:
+    image: eliormigdal/kaplat-dbs-exercise:latest
+    restart: on-failure:2
+    ports:
+      - "3769:9285"
+    depends_on:
+      - postgres
+      - mongo
